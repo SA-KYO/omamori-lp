@@ -6,8 +6,10 @@
   <title>御守りブザー｜ワンタップで安心を。Apple Watch対応の防犯・見守りアプリ</title>
   <meta name="description" content="ワンタップでブザー・SOS表示・位置情報共有。Apple Watchにも対応した『御守りブザー』公式ランディングページ。通勤・通学や夜道の安心に。" />
 
+  <!-- iOS Smart App Banner（Safari上部） -->
   <meta name="apple-itunes-app" content="app-id=6443486111" />
 
+  <!-- OGP / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="御守りブザー" />
   <meta property="og:title" content="御守りブザー｜ワンタップで安心を。Apple Watch対応" />
@@ -16,8 +18,9 @@
   <meta property="og:url" content="https://example.com/" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" href="assets/omamori-icon.png" />
-  <link rel="apple-touch-icon" href="assets/omamori-icon.png" />
+  <!-- ★ アイコンを添付のものに変更 -->
+  <link rel="icon" href="assets/rogo-omamori-new-ookii.jpeg" />
+  <link rel="apple-touch-icon" href="assets/rogo-omamori-new-ookii.jpeg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,7 +28,7 @@
 
   <style>
     :root{
-      --pink:#ff73aa; --pink-strong:#ff4a92; --ink:#1a1a1a; --ink-weak:#555; --bg:#fff7fb; --card:#fff; --radius:16px; --shadow:0 12px 32px rgba(0,0,0,.10); --ease:cubic-bezier(.2,.8,.2,1);
+      --pink:#ff73aa; --pink-strong:#ff4a92; --ink:#1a1a1a; --ink-weak:#4b4b4b; --bg:#fff7fb; --card:#fff; --radius:16px; --shadow:0 12px 32px rgba(0,0,0,.10); --ease:cubic-bezier(.2,.8,.2,1);
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;font-family:'Noto Sans JP',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg)}
@@ -39,51 +42,74 @@
     .btn-dark{background:#111;color:#fff}
     .badge{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid #eee;color:var(--ink-weak);padding:8px 12px;border-radius:999px;font-size:12px;box-shadow:var(--shadow)}
 
-    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(0,0,0,.06)}
+    /* ========== Header & Nav ========== */
+    header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.78);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(0,0,0,.06)}
     .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .nav a{color:var(--ink);font-weight:700}
-    .nav-menu{display:flex;gap:20px;align-items:center}
     .logo{display:flex;align-items:center;gap:10px}
-    .logo img{width:28px;height:28px}
+    .logo img{width:28px;height:28px;border-radius:6px}
 
-    /* ========= Hero ========= */
+    .nav-menu{display:flex;gap:20px;align-items:center}
+    .nav-menu a{color:var(--ink);font-weight:700}
+
+    /* ハンバーガー */
+    .menu-btn{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;border:1px solid #e5e5e5;background:#fff;box-shadow:var(--shadow)}
+    .menu-btn svg{width:22px;height:22px}
+    @media (max-width:900px){
+      .nav-menu{display:none}
+      .menu-btn{display:inline-flex}
+    }
+    /* モバイルメニュー */
+    .mobile-nav{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.35);backdrop-filter:blur(3px);display:none}
+    .mobile-nav.open{display:block}
+    .mobile-panel{position:absolute;right:12px;top:12px;bottom:12px;width:min(84vw,360px);background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.18);padding:18px 16px 16px;display:flex;flex-direction:column}
+    .mobile-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .mobile-head strong{display:flex;align-items:center;gap:10px}
+    .mobile-head img{width:28px;height:28px;border-radius:6px}
+    .mobile-links{display:flex;flex-direction:column;gap:12px;margin:14px 0 18px}
+    .mobile-links a{color:#111;font-weight:700}
+
+    /* ========== Hero ========== */
     .hero{position:relative;isolation:isolate}
     .hero .bg{position:absolute;inset:-6% -2%;z-index:-2;will-change:transform}
     .hero .bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.92) saturate(110%);object-position:center 30%;transform:scale(1.06)}
-    /* もっと透過（=薄く）*/
+    /* 透明度を上げたオーバーレイ（薄め） */
     .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,247,251,.18) 0%, rgba(255,247,251,.24) 40%, rgba(255,247,251,.50) 75%);z-index:-1}
     .hero-inner{padding:88px 0 40px;display:grid;grid-template-columns:1fr;gap:24px;align-items:center;text-align:center}
-    .hero .content{max-width:820px;margin:0 auto}
-    .hero h1{font-size:clamp(28px,4.2vw,48px);line-height:1.12;margin:0 0 12px;font-weight:900}
-    /* ピンクラインを削除 */
+
+    /* ★ 文字が背景で消えないスクラム（パネル） */
+    .hero .content{position:relative;max-width:820px;margin:0 auto;padding:0 10px}
+    .hero .content::before{content:"";position:absolute;inset:-8px -12px;z-index:-1;background:radial-gradient(ellipse at 50% 20%, rgba(255,255,255,.78), rgba(255,255,255,.42) 60%, rgba(255,255,255,0) 75%);filter:blur(2px);border-radius:16px;pointer-events:none}
+
+    .hero h1{font-size:clamp(28px,4.2vw,48px);line-height:1.15;margin:0 0 12px;font-weight:900}
     .hero h1 .hi{position:relative}
+    /* ピンクラインを非表示 */
     .hero h1 .hi::after{display:none}
     .hero p{font-size:clamp(15px,2.1vw,18px);color:var(--ink-weak);margin:0 0 22px}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center}
 
-    /* ========= Sections ========= */
+    /* ========== Sections ========== */
     section{padding:64px 0}
     .sec-title{font-size:28px;font-weight:900;text-align:center;margin:0 0 14px}
     .sec-lead{color:var(--ink-weak);text-align:center;margin:0 0 28px}
 
-    /* ========= Features ========= */
+    /* ========== Features ========== */
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
     .card{background:var(--card);border-radius:var(--radius);padding:18px 18px 22px;box-shadow:var(--shadow);transform:translateY(8px);transition:transform .4s var(--ease), box-shadow .4s var(--ease)}
     .card:hover{transform:translateY(-6px) rotate3d(.2,.6,0,2deg);box-shadow:0 20px 40px rgba(0,0,0,.14)}
-    /* 画像が切れないように contain＋比率固定。余白は淡いピンクでフレーミング */
+    /* 画像を "全体表示" に */
     .feature-img{width:100%;aspect-ratio:4/3;height:auto;object-fit:contain;background:#fff;border:1px solid #f1dbe7;border-radius:16px;box-shadow:0 6px 16px rgba(0,0,0,.06);padding:8px;margin-bottom:12px}
     .card h3{margin:0 0 8px;font-size:20px}
     .card p{margin:0;color:var(--ink-weak);line-height:1.8}
     @media (max-width:900px){.grid-3{grid-template-columns:1fr}}
 
-    /* ========= Watch ========= */
+    /* ========== Watch ========== */
     .watch{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;justify-items:center}
     .watch .device{max-width:520px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.12))}
     .float-y{animation:floatY 5.5s ease-in-out infinite}
     @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
     @media (max-width:900px){.watch{grid-template-columns:1fr;justify-items:stretch}}
 
-    /* ========= Steps ========= */
+    /* ========== Steps ========== */
     .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .step{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
     .step::after{content:"";position:absolute;inset:auto -40% -40% auto;width:160px;height:160px;background:radial-gradient(closest-side, rgba(255,115,170,.25), transparent 70%);filter:blur(10px);transform:translate(40px,40px)}
@@ -91,26 +117,26 @@
     .step h4{margin:4px 0 8px}
     @media (max-width:900px){.steps{grid-template-columns:1fr}}
 
-    /* ========= CTA band ========= */
+    /* ========== CTA band ========== */
     .cta-band{background:linear-gradient(90deg, #ffe7f1, #fff7fb);padding:26px;border-radius:var(--radius);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
     .pulse{animation:pulse 2.4s var(--ease) infinite}
     @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 
-    /* ========= FAQ ========= */
+    /* ========== FAQ ========== */
     details{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);transition:transform .3s var(--ease)}
     details[open]{transform:translateY(-2px)}
     summary{cursor:pointer;font-weight:700}
     .faq{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     @media (max-width:900px){.faq{grid-template-columns:1fr}}
 
-    /* ========= Sticky CTA ========= */
-    .sticky-cta{position:fixed;left:0;right:0;bottom:14px;margin:auto;display:flex;justify-content:center;z-index:60}
+    /* ========== Sticky CTA ========== */
+    .sticky-cta{position:fixed;left:0;right:0;bottom:14px;margin:auto;display:flex;justify-content:center;z-index:55}
     .sticky-cta .inner{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:10px 14px;border-radius:999px;box-shadow:var(--shadow)}
-    .sticky-cta img{height:22px}
+    .sticky-cta img{height:22px;border-radius:4px}
 
     footer{padding:42px 0;color:#888}
 
-    /* ========= Scroll reveals ========= */
+    /* ========== Scroll reveals ========== */
     .reveal{opacity:0;transform:translateY(10px) scale(.98);transition:opacity .7s var(--ease), transform .7s var(--ease)}
     .reveal.inview{opacity:1;transform:none}
 
@@ -121,23 +147,43 @@
   <header id="top">
     <div class="container nav">
       <a class="logo" href="#top" aria-label="御守りブザー ホーム">
-        <img src="assets/omamori-icon.png" alt="御守りアイコン" />
+        <img src="assets/rogo-omamori-new-ookii.jpeg" alt="御守りアイコン" />
         <strong>御守りブザー</strong>
       </a>
-      <nav class="nav-menu">
+      <nav class="nav-menu" aria-label="メインメニュー">
         <a href="#features">機能</a>
         <a href="#howto">使い方</a>
         <a href="#watch">Apple Watch</a>
         <a href="#faq">FAQ</a>
-        <a class="btn" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" aria-label="App Storeでダウンロード">App Storeでダウンロード</a>
+        <a class="btn" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener">App Storeでダウンロード</a>
       </nav>
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="mobileNav" aria-label="メニューを開く">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
   </header>
 
+  <!-- モバイルメニュー -->
+  <div id="mobileNav" class="mobile-nav" hidden>
+    <div class="mobile-panel" role="dialog" aria-modal="true" aria-label="モバイルメニュー">
+      <div class="mobile-head">
+        <strong><img src="assets/rogo-omamori-new-ookii.jpeg" alt="御守りアイコン"/>御守りブザー</strong>
+        <button id="menuClose" class="menu-btn" aria-label="メニューを閉じる"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5l-14 14"/></svg></button>
+      </div>
+      <nav class="mobile-links">
+        <a href="#features">機能</a>
+        <a href="#howto">使い方</a>
+        <a href="#watch">Apple Watch</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" style="margin-top:auto">App Storeでダウンロード</a>
+    </div>
+  </div>
+
   <!-- ========= Hero ========= -->
-  <section class="hero">
-    <div class="bg"><img id="heroBg" src="assets/hero.jpg" alt="御守りとやさしい背景" loading="eager" /></div>
-    <div class="overlay"></div>
+  <section class="hero" aria-label="キービジュアル">
+    <div class="bg" aria-hidden="true"><img id="heroBg" src="assets/hero.jpg" alt="" loading="eager" /></div>
+    <div class="overlay" aria-hidden="true"></div>
     <div class="container hero-inner">
       <div class="content reveal" data-delay="0">
         <div class="badge">いつでも、あなたに寄り添う安心</div>
@@ -280,7 +326,7 @@
   <!-- Sticky CTA（下部固定） -->
   <div class="sticky-cta" id="stickyCta" hidden>
     <div class="inner">
-      <img src="assets/omamori-icon.png" alt="御守りアイコン" />
+      <img src="assets/rogo-omamori-new-ookii.jpeg" alt="御守りアイコン" />
       <a class="btn" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" data-cta="sticky">App Storeでダウンロード</a>
     </div>
   </div>
@@ -289,23 +335,44 @@
     // 年号
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // パララックス（軽量）
+    // ===== モバイルメニュー =====
+    const body = document.body;
+    const mobileNav = document.getElementById('mobileNav');
+    const menuBtn = document.getElementById('menuBtn');
+    const menuClose = document.getElementById('menuClose');
+
+    function openMenu(){ mobileNav.hidden=false; mobileNav.classList.add('open'); body.style.overflow='hidden'; menuBtn.setAttribute('aria-expanded','true'); }
+    function closeMenu(){ mobileNav.classList.remove('open'); mobileNav.hidden=true; body.style.overflow=''; menuBtn.setAttribute('aria-expanded','false'); }
+
+    menuBtn.addEventListener('click',()=> openMenu());
+    menuClose.addEventListener('click',()=> closeMenu());
+    mobileNav.addEventListener('click',e=>{ if(e.target===mobileNav) closeMenu(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeMenu(); });
+    document.querySelectorAll('.mobile-links a').forEach(a=>a.addEventListener('click',()=> closeMenu()));
+
+    // ===== 軽量パララックス（文字が消えないようZ軸は固定／背景のみ移動） =====
     const heroBg = document.getElementById('heroBg');
+    let lastY = 0; // iOSでのjank軽減
     window.addEventListener('scroll',()=>{
-      const t = Math.min(40, window.scrollY * .12);
-      heroBg.style.transform = `translateY(${t}px) scale(1.06)`;
+      const y = Math.min(40, window.scrollY * .12);
+      if(Math.abs(y-lastY)>0.5){
+        heroBg.style.transform = `translate3d(0, ${y}px, 0) scale(1.06)`; // 背景だけを移動
+        lastY = y;
+      }
     },{passive:true});
 
-    // スクロールリビール
-    const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const d=+e.target.dataset.delay||0; setTimeout(()=>e.target.classList.add('inview'), d); io.unobserve(e.target);} }),{threshold:.15});
+    // ===== スクロールリビール =====
+    const io = new IntersectionObserver(entries=>entries.forEach(e=>{
+      if(e.isIntersecting){ const d=+e.target.dataset.delay||0; setTimeout(()=>e.target.classList.add('inview'), d); io.unobserve(e.target);} 
+    }),{threshold:.15});
     document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
 
-    // Sticky CTA
+    // ===== Sticky CTA =====
     const sticky = document.getElementById('stickyCta');
     setTimeout(()=>sticky.hidden=false,3000);
     window.addEventListener('scroll',()=>{ const s=window.scrollY, h=document.body.scrollHeight - innerHeight; if(h>0&&s/h>0.6) sticky.hidden=false; },{passive:true});
 
-    // GTM差し替え用ダミー計測
+    // （任意）簡易トラッキング
     function track(name,data){window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:name,...data});}
     document.querySelectorAll('[data-cta]').forEach(el=>el.addEventListener('click',()=>track('cta_click',{id:el.dataset.cta})));
   </script>
