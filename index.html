@@ -6,10 +6,8 @@
   <title>御守りブザー｜ワンタップで安心を。Apple Watch対応の防犯・見守りアプリ</title>
   <meta name="description" content="ワンタップでブザー・SOS表示・位置情報共有。Apple Watchにも対応した『御守りブザー』公式ランディングページ。通勤・通学や夜道の安心に。" />
 
-  <!-- iOS Smart App Banner（Safariで上部にAppバナー表示） -->
   <meta name="apple-itunes-app" content="app-id=6443486111" />
 
-  <!-- OGP / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="御守りブザー" />
   <meta property="og:title" content="御守りブザー｜ワンタップで安心を。Apple Watch対応" />
@@ -31,14 +29,14 @@
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;font-family:'Noto Sans JP',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg)}
-    a{color:#fff;text-decoration:none}
+    a{color:var(--pink-strong);text-decoration:none}
     img{max-width:100%;display:block}
 
     .container{max-width:1200px;margin:0 auto;padding:0 24px}
     .btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--pink-strong);color:#fff;border-radius:999px;padding:14px 22px;font-weight:700;box-shadow:var(--shadow);transition:transform .25s var(--ease), box-shadow .25s var(--ease)}
     .btn:hover{transform:translateY(-2px) scale(1.02)}
     .btn-lg{padding:16px 26px;font-size:18px}
-    .btn-dark{background:#111}
+    .btn-dark{background:#111;color:#fff}
     .badge{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid #eee;color:var(--ink-weak);padding:8px 12px;border-radius:999px;font-size:12px;box-shadow:var(--shadow)}
 
     header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(0,0,0,.06)}
@@ -51,16 +49,17 @@
     /* ========= Hero ========= */
     .hero{position:relative;isolation:isolate}
     .hero .bg{position:absolute;inset:-6% -2%;z-index:-2;will-change:transform}
-    .hero .bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.9) saturate(110%);object-position:center 30%;transform:scale(1.06)}
-    .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,247,251,.35) 0%, rgba(255,247,251,.45) 40%, rgba(255,247,251,.78) 75%);z-index:-1}
+    .hero .bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.92) saturate(110%);object-position:center 30%;transform:scale(1.06)}
+    /* もっと透過（=薄く）*/
+    .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,247,251,.18) 0%, rgba(255,247,251,.24) 40%, rgba(255,247,251,.50) 75%);z-index:-1}
     .hero-inner{padding:88px 0 40px;display:grid;grid-template-columns:1fr;gap:24px;align-items:center;text-align:center}
     .hero .content{max-width:820px;margin:0 auto}
     .hero h1{font-size:clamp(28px,4.2vw,48px);line-height:1.12;margin:0 0 12px;font-weight:900}
-    .hero h1 .hi{position:relative;display:inline-block}
-    .hero h1 .hi::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.5em;background:linear-gradient(90deg, rgba(255,115,170,.25), rgba(255,115,170,.6));border-radius:8px;transform-origin:left center;transform:scaleX(0);animation:underline .9s var(--ease) .2s forwards}
+    /* ピンクラインを削除 */
+    .hero h1 .hi{position:relative}
+    .hero h1 .hi::after{display:none}
     .hero p{font-size:clamp(15px,2.1vw,18px);color:var(--ink-weak);margin:0 0 22px}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center}
-    @keyframes underline{to{transform:scaleX(1)}}
 
     /* ========= Sections ========= */
     section{padding:64px 0}
@@ -71,10 +70,11 @@
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
     .card{background:var(--card);border-radius:var(--radius);padding:18px 18px 22px;box-shadow:var(--shadow);transform:translateY(8px);transition:transform .4s var(--ease), box-shadow .4s var(--ease)}
     .card:hover{transform:translateY(-6px) rotate3d(.2,.6,0,2deg);box-shadow:0 20px 40px rgba(0,0,0,.14)}
-    .feature-img{width:100%;height:360px;object-fit:cover;border-radius:16px;box-shadow:0 6px 16px rgba(0,0,0,.06);margin-bottom:12px}
+    /* 画像が切れないように contain＋比率固定。余白は淡いピンクでフレーミング */
+    .feature-img{width:100%;aspect-ratio:4/3;height:auto;object-fit:contain;background:#fff;border:1px solid #f1dbe7;border-radius:16px;box-shadow:0 6px 16px rgba(0,0,0,.06);padding:8px;margin-bottom:12px}
     .card h3{margin:0 0 8px;font-size:20px}
     .card p{margin:0;color:var(--ink-weak);line-height:1.8}
-    @media (max-width:900px){.grid-3{grid-template-columns:1fr}.feature-img{height:240px}}
+    @media (max-width:900px){.grid-3{grid-template-columns:1fr}}
 
     /* ========= Watch ========= */
     .watch{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;justify-items:center}
@@ -171,13 +171,11 @@
           <p>状況に合わせて選べる高音アラーム。止め方もワンタップで迷いません。</p>
         </div>
         <div class="card reveal" data-delay="120">
-          <!-- ★ SOS機能の実機スクショを大きく表示 -->
           <img class="feature-img" src="assets/sos-screen.jpg" alt="助けてください（SOS表示）" loading="lazy" />
           <h3>SOSフルスクリーン</h3>
           <p>声が出せない時は画面で助けを表示。離れた場所からでも目に入りやすい大文字設計。</p>
         </div>
         <div class="card reveal" data-delay="240">
-          <!-- ★ 位置情報共有の実機スクショを大きく表示 -->
           <img class="feature-img" src="assets/location-screen.jpg" alt="現在地をシェア（位置情報）" loading="lazy" />
           <h3>位置情報の共有</h3>
           <p>地図から現在地の住所を取得して、メッセージアプリ等で家族・友人に共有できます。</p>
@@ -273,8 +271,8 @@
     <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
       <small>© <span id="y"></span> 御守りブザー</small>
       <div style="display:flex;gap:12px">
-        <a href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" style="color:var(--pink-strong)">App Store</a>
-        <a href="#faq" style="color:var(--pink-strong)">よくある質問</a>
+        <a href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener">App Store</a>
+        <a href="#faq">よくある質問</a>
       </div>
     </div>
   </footer>
@@ -286,10 +284,6 @@
       <a class="btn" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" data-cta="sticky">App Storeでダウンロード</a>
     </div>
   </div>
-
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"MobileApplication","name":"御守りブザー","operatingSystem":"iOS","applicationCategory":"SecurityApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"1"},"url":"https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111"}
-  </script>
 
   <script>
     // 年号
