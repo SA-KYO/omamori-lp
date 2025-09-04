@@ -29,6 +29,7 @@
   <style>
     :root{
       --pink:#ff73aa; --pink-strong:#ff4a92; --ink:#1a1a1a; --ink-weak:#4b4b4b; --bg:#fff7fb; --card:#fff; --radius:16px; --shadow:0 12px 32px rgba(0,0,0,.10); --ease:cubic-bezier(.2,.8,.2,1);
+      --sticky-h: 68px; /* モバイルの下部固定CTA本体の高さ */
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;font-family:'Noto Sans JP',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg)}
@@ -129,10 +130,14 @@
     .faq{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     @media (max-width:900px){.faq{grid-template-columns:1fr}}
 
-    /* ========== Sticky CTA ========== */
-    .sticky-cta{position:fixed;left:0;right:0;bottom:14px;margin:auto;display:flex;justify-content:center;z-index:55}
-    .sticky-cta .inner{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:10px 14px;border-radius:999px;box-shadow:var(--shadow)}
+    /* ========== Sticky CTA（下部固定） ========== */
+    .sticky-cta{position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));margin:auto;display:flex;justify-content:center;z-index:55;pointer-events:none}
+    .sticky-cta .inner{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:10px 14px;border-radius:999px;box-shadow:var(--shadow);pointer-events:auto}
     .sticky-cta img{height:22px;border-radius:4px}
+    /* モバイル時は下部CTAの分だけ“余白”を確保して被りを防止 */
+    @media (max-width:900px){
+      body.has-sticky{padding-bottom:calc(var(--sticky-h) + env(safe-area-inset-bottom) + 24px);} /* 24pxは余裕 */
+    }
 
     footer{padding:42px 0;color:#888}
 
@@ -324,10 +329,10 @@
   </footer>
 
   <!-- Sticky CTA（下部固定） -->
-  <div class="sticky-cta" id="stickyCta" hidden>
+  <div class="sticky-cta" id="stickyCta" hidden aria-hidden="true">
     <div class="inner">
       <img src="assets/rogo-omamori-new-ookii.jpeg" alt="御守りアイコン" />
-      <a class="btn" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" data-cta="sticky">App Storeでダウンロード</a>
+      <a class="btn" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" data-cta="sticky" onclick="event.stopPropagation()">App Storeでダウンロード</a>
     </div>
   </div>
 
@@ -350,13 +355,13 @@
     document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeMenu(); });
     document.querySelectorAll('.mobile-links a').forEach(a=>a.addEventListener('click',()=> closeMenu()));
 
-    // ===== 軽量パララックス（文字が消えないようZ軸は固定／背景のみ移動） =====
+    // ===== 軽量パララックス（文字は固定、背景のみ移動） =====
     const heroBg = document.getElementById('heroBg');
     let lastY = 0; // iOSでのjank軽減
     window.addEventListener('scroll',()=>{
       const y = Math.min(40, window.scrollY * .12);
       if(Math.abs(y-lastY)>0.5){
-        heroBg.style.transform = `translate3d(0, ${y}px, 0) scale(1.06)`; // 背景だけを移動
+        heroBg.style.transform = `translate3d(0, ${y}px, 0) scale(1.06)`; // 背景だけ移動
         lastY = y;
       }
     },{passive:true});
@@ -367,14 +372,20 @@
     }),{threshold:.15});
     document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
 
-    // ===== Sticky CTA =====
+    // ===== Sticky CTA（被らないように余白を付与） =====
     const sticky = document.getElementById('stickyCta');
-    setTimeout(()=>sticky.hidden=false,3000);
-    window.addEventListener('scroll',()=>{ const s=window.scrollY, h=document.body.scrollHeight - innerHeight; if(h>0&&s/h>0.6) sticky.hidden=false; },{passive:true});
-
-    // （任意）簡易トラッキング
-    function track(name,data){window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:name,...data});}
-    document.querySelectorAll('[data-cta]').forEach(el=>el.addEventListener('click',()=>track('cta_click',{id:el.dataset.cta})));
+    function showSticky(){
+      if(sticky.hidden){
+        sticky.hidden = false;
+        body.classList.add('has-sticky'); // 余白確保（CSS）
+      }
+    }
+    // 3秒後に一度表示
+    setTimeout(showSticky,3000);
+    // ページ下部でも表示を保証
+    window.addEventListener('scroll',()=>{
+      const s=window.scrollY, h=document.body.scrollHeight - innerHeight; if(h>0&&s/h>0.6) showSticky();
+    },{passive:true});
   </script>
 </body>
 </html>
