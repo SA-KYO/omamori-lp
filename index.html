@@ -6,8 +6,10 @@
   <title>御守りブザー｜ワンタップで安心を。Apple Watch対応の防犯・見守りアプリ</title>
   <meta name="description" content="ワンタップでブザー・SOS表示・位置情報共有。Apple Watchにも対応した『御守りブザー』公式ランディングページ。通勤・通学や夜道の安心に。" />
 
+  <!-- iOS Smart App Banner（Safariで上部にAppバナー表示） -->
   <meta name="apple-itunes-app" content="app-id=6443486111" />
 
+  <!-- OGP / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="御守りブザー" />
   <meta property="og:title" content="御守りブザー｜ワンタップで安心を。Apple Watch対応" />
@@ -16,101 +18,131 @@
   <meta property="og:url" content="https://example.com/" />
   <meta name="twitter:card" content="summary_large_image" />
 
+  <!-- アイコン等 -->
   <link rel="icon" href="assets/omamori-icon.png" />
   <link rel="apple-touch-icon" href="assets/omamori-icon.png" />
 
+  <!-- フォント -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet" />
 
   <style>
     :root{
-      --pink:#ff73aa;
+      --pink:#ff73aa;         /* ブランドピンク */
       --pink-strong:#ff4a92;
       --ink:#1a1a1a;
       --ink-weak:#555;
-      --bg:#fff7fb;
+      --bg:#fff7fb;           /* ほのかなピンク */
       --card:#ffffff;
       --radius:16px;
-      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --shadow:0 12px 32px rgba(0,0,0,.10);
+      --ease: cubic-bezier(.2,.8,.2,1);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:'Noto Sans JP',system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Apple Color Emoji", "Segoe UI Emoji"; color:var(--ink); background:var(--bg)}
+    html,body{margin:0;padding:0;font-family:'Noto Sans JP',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:var(--bg)}
     a{color:var(--pink-strong);text-decoration:none}
     img{max-width:100%;display:block}
-    .container{max-width:1080px;margin:0 auto;padding:0 20px}
-    .btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:#fff;border-radius:999px;padding:14px 22px;font-weight:700;box-shadow:var(--shadow);transition:transform .08s ease, box-shadow .2s ease}
-    .btn:hover{transform:translateY(-1px)}
+
+    /* レイアウト */
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--ink);color:#fff;border-radius:999px;padding:14px 22px;font-weight:700;box-shadow:var(--shadow);transition:transform .25s var(--ease), box-shadow .25s var(--ease)}
+    .btn:hover{transform:translateY(-2px) scale(1.02)}
+    .btn:active{transform:translateY(0)}
     .btn-lg{padding:16px 26px;font-size:18px}
     .btn-pink{background:var(--pink-strong)}
-    .badge{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid #eee;color:var(--ink-weak);padding:8px 12px;border-radius:999px;font-size:12px}
-    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(0,0,0,.06)}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1px solid #eee;color:var(--ink-weak);padding:8px 12px;border-radius:999px;font-size:12px;box-shadow:var(--shadow)}
+
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.75);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(0,0,0,.06);transition:transform .5s var(--ease)}
     .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .nav a{color:var(--ink);font-weight:600}
+    .nav a{color:var(--ink);font-weight:700}
     .nav-menu{display:flex;gap:20px;align-items:center}
     .logo{display:flex;align-items:center;gap:10px}
     .logo img{width:28px;height:28px}
 
+    /* ===== Hero ===== */
     .hero{position:relative;isolation:isolate}
-    .hero .bg{position:absolute;inset:0;z-index:-1;}
-    .hero .bg img{width:100%;height:100%;object-fit:cover;filter:saturate(105%) contrast(102%)}
-    .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,247,251,.8) 0%, rgba(255,247,251,.85) 40%, rgba(255,247,251,1) 75%)}
-    .hero-inner{padding:72px 0 24px;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
-    .hero h1{font-size:clamp(26px,4.3vw,46px);line-height:1.15;margin:0 0 12px;font-weight:900;color:var(--ink)}
-    .hero p{font-size:clamp(15px,2.2vw,18px);color:var(--ink-weak);margin:0 0 22px}
+    .hero .bg{position:absolute;inset:-6% -2%;z-index:-2;will-change:transform}
+    .hero .bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.9) saturate(110%);object-position:center 30%;transform:scale(1.06)}
+    .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,247,251,.35) 0%, rgba(255,247,251,.45) 40%, rgba(255,247,251,.78) 75%);z-index:-1}
+    .hero-inner{padding:86px 0 36px;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+    .hero h1{font-size:clamp(28px,4.2vw,48px);line-height:1.12;margin:0 0 12px;font-weight:900;color:var(--ink)}
+    .hero h1 .hi{position:relative;display:inline-block}
+    .hero h1 .hi::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.5em;background:linear-gradient(90deg, rgba(255,115,170,.25), rgba(255,115,170,.6));border-radius:8px;transform-origin:left center;transform:scaleX(0);animation:underline .9s var(--ease) .2s forwards}
+    .hero p{font-size:clamp(15px,2.1vw,18px);color:var(--ink-weak);margin:0 0 22px}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-    .app-badge{height:48px;border-radius:12px;border:1px solid #e9e9e9;background:#fff;padding:6px 10px;display:flex;align-items:center}
-    .app-badge img{height:24px}
+    .app-badge{height:50px;border-radius:12px;border:1px solid #e9e9e9;background:#fff;padding:6px 12px;display:flex;align-items:center;box-shadow:var(--shadow);transition:transform .25s var(--ease)}
+    .app-badge:hover{transform:translateY(-2px)}
+    .app-badge img{height:26px}
     .hero-card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    @keyframes underline{to{transform:scaleX(1)}}
 
     @media (max-width:900px){
-      .hero-inner{grid-template-columns:1fr;gap:18px;padding:48px 0}
+      .hero-inner{grid-template-columns:1fr;gap:18px;padding:64px 0}
       .hero .bg img{object-position:center}
     }
 
-    .trust{padding:18px 0}
-    .trust .row{display:flex;gap:12px;flex-wrap:wrap}
-
-    section{padding:56px 0}
+    /* ===== Sections ===== */
+    section{padding:64px 0}
     .sec-title{font-size:28px;font-weight:900;text-align:center;margin:0 0 14px}
     .sec-lead{color:var(--ink-weak);text-align:center;margin:0 0 28px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
-    .card h3{margin:0 0 8px;font-size:18px}
-    .card p{margin:0;color:var(--ink-weak)}
-    .icon{width:48px;height:48px;border-radius:12px;background:#fff3f8;display:grid;place-items:center;margin-bottom:10px}
 
+    /* ===== Feature Cards ===== */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transform:translateY(8px);transition:transform .4s var(--ease), box-shadow .4s var(--ease)}
+    .card:hover{transform:translateY(-6px) rotate3d(.2, .6, 0, 2deg);box-shadow:0 20px 40px rgba(0,0,0,.14)}
+    .feature-img{width:100%;height:220px;object-fit:cover;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,.06);margin-bottom:12px}
+    .card h3{margin:0 0 8px;font-size:20px}
+    .card p{margin:0;color:var(--ink-weak);line-height:1.8}
     @media (max-width:900px){.grid-3{grid-template-columns:1fr}}
 
+    /* ===== Watch ===== */
+    .watch{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;justify-items:center}
+    .watch .device{max-width:520px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.12))}
+    .float-y{animation:floatY 5.5s ease-in-out infinite}
+    @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    @media (max-width:900px){.watch{grid-template-columns:1fr;justify-items:stretch}}
+
+    /* ===== Steps ===== */
     .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .step{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);position:relative}
+    .step{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .step::after{content:"";position:absolute;inset:auto -40% -40% auto;width:160px;height:160px;background:radial-gradient(closest-side, rgba(255,115,170,.25), transparent 70%);filter:blur(10px);transform:translate(40px,40px)}
     .step .num{position:absolute;top:12px;right:16px;font-weight:900;color:#f3a7c3}
     .step h4{margin:4px 0 8px}
-
     @media (max-width:900px){.steps{grid-template-columns:1fr}}
 
-    .watch{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
-    @media (max-width:900px){.watch{grid-template-columns:1fr}}
-
+    /* ===== CTA band ===== */
     .cta-band{background:linear-gradient(90deg, #ffe7f1, #fff7fb);padding:26px;border-radius:var(--radius);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
+    .pulse{animation:pulse 2.4s var(--ease) infinite}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 
-    details{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
+    /* ===== FAQ ===== */
+    details{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);transition:transform .3s var(--ease)}
+    details[open]{transform:translateY(-2px)}
     summary{cursor:pointer;font-weight:700}
     .faq{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     @media (max-width:900px){.faq{grid-template-columns:1fr}}
 
+    /* ===== Sticky CTA ===== */
     .sticky-cta{position:fixed;left:0;right:0;bottom:14px;margin:auto;display:flex;justify-content:center;z-index:60}
     .sticky-cta .inner{display:flex;align-items:center;gap:12px;background:#111;color:#fff;padding:10px 14px;border-radius:999px;box-shadow:var(--shadow)}
     .sticky-cta img{height:22px}
 
     footer{padding:42px 0;color:#888}
 
-    .fade-up{opacity:0;transform:translateY(8px);transition:opacity .6s ease, transform .6s ease}
-    .inview{opacity:1;transform:none}
+    /* ===== Scroll reveals ===== */
+    .reveal{opacity:0;transform:translateY(10px) scale(.98);transition:opacity .7s var(--ease), transform .7s var(--ease)}
+    .reveal.inview{opacity:1;transform:none}
+
+    /* 動きが苦手な方へ配慮 */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important;transition:none !important}
+      .hero .bg img{transform:none}
+    }
   </style>
 </head>
 <body>
-  <header>
+  <header id="top">
     <div class="container nav">
       <a class="logo" href="#top" aria-label="御守りブザー ホーム">
         <img src="assets/omamori-icon.png" alt="御守りアイコン" />
@@ -128,52 +160,54 @@
     </div>
   </header>
 
-  <section id="top" class="hero">
-    <div class="bg"><img src="assets/hero.jpg" alt="御守りとやさしい背景" /></div>
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="bg"><img id="heroBg" src="assets/hero.jpg" alt="御守りとやさしい背景" /></div>
     <div class="overlay"></div>
     <div class="container hero-inner">
-      <div>
+      <div class="reveal" data-delay="0">
         <div class="badge">いつでも、あなたに寄り添う安心</div>
-        <h1>ワンタップで <span style="color:var(--pink-strong)">安心</span> を。<br/>iPhoneに御守りを。</h1>
+        <h1>ワンタップで <span class="hi">安心</span> を。<br/>iPhoneに御守りを。</h1>
         <p>ブザー・<strong>SOS表示</strong>・<strong>位置情報共有</strong>を1秒で。Apple Watchにも対応し、通勤・通学や夜道でも迷わず使えます。</p>
         <div class="hero-cta">
-          <a class="app-badge" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" data-cta="hero-badge">
+          <a class="app-badge pulse" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" data-cta="hero-badge">
             <img src="assets/appstore-ja.png" alt="App Storeからダウンロード" />
           </a>
           <a class="btn btn-lg btn-pink" href="#howto">30秒で使い方を見る</a>
         </div>
-        <div class="trust">
-          <div class="row">
-            <span class="badge">ブザー効果音 <strong>3種類</strong></span>
-            <span class="badge">位置共有（地図リンク）</span>
-            <span class="badge">SOSフルスクリーン表示</span>
-            <span class="badge">Apple Watch対応</span>
+        <div class="trust" style="margin-top:10px">
+          <div class="row" style="display:flex;gap:12px;flex-wrap:wrap">
+            <span class="badge reveal" data-delay="80">ブザー効果音 <strong>3種類</strong></span>
+            <span class="badge reveal" data-delay="150">位置共有（地図リンク）</span>
+            <span class="badge reveal" data-delay="220">SOSフルスクリーン表示</span>
+            <span class="badge reveal" data-delay="290">Apple Watch対応</span>
           </div>
         </div>
       </div>
-      <div class="hero-card fade-up">
+      <div class="hero-card reveal" data-delay="120">
         <img src="assets/hero2.png" alt="御守りブザー画面イメージ" />
       </div>
     </div>
   </section>
 
+  <!-- ===== Features ===== -->
   <section id="features">
     <div class="container">
-      <h2 class="sec-title">“迷わず使える”を徹底設計</h2>
-      <p class="sec-lead">非常時は判断より行動が大切。大きなボタン・シンプルな導線・視認性の高い配色で、<br/>誰でもすぐ使える体験にこだわりました。</p>
+      <h2 class="sec-title reveal">“迷わず使える”を徹底設計</h2>
+      <p class="sec-lead reveal" data-delay="80">非常時は判断より行動が大切。大きなボタン・シンプルな導線・視認性の高い配色で、<br/>誰でもすぐ使える体験にこだわりました。</p>
       <div class="grid-3">
-        <div class="card fade-up">
-          <div class="icon"><img src="assets/feature-1.png" alt="3種類の効果音" /></div>
+        <div class="card reveal" data-delay="0">
+          <img class="feature-img" src="assets/feature-1.png" alt="ブザー効果音 3種類" />
           <h3>ブザー効果音 3種類</h3>
           <p>状況に合わせて選べる高音アラーム。止め方もワンタップで迷いません。</p>
         </div>
-        <div class="card fade-up">
-          <div class="icon"><img src="assets/feature-2.png" alt="SOSフルスクリーン" /></div>
+        <div class="card reveal" data-delay="120">
+          <img class="feature-img" src="assets/feature-2.png" alt="SOSフルスクリーン" />
           <h3>SOSフルスクリーン</h3>
           <p>声が出せない時は画面で助けを表示。離れた場所からでも目に入りやすい大文字設計。</p>
         </div>
-        <div class="card fade-up">
-          <div class="icon"><img src="assets/feature-3.jpg" alt="位置情報共有" /></div>
+        <div class="card reveal" data-delay="240">
+          <img class="feature-img" src="assets/feature-3.jpg" alt="位置情報の共有" />
           <h3>位置情報の共有</h3>
           <p>地図から現在地の住所を取得して、メッセージアプリ等で家族・友人に共有できます。</p>
         </div>
@@ -181,9 +215,10 @@
     </div>
   </section>
 
-  <section id="watch" class="watch">
+  <!-- ===== Watch ===== -->
+  <section id="watch">
     <div class="container watch">
-      <div class="fade-up">
+      <div class="reveal" data-delay="0">
         <h2 class="sec-title">Apple Watchにも対応</h2>
         <p class="sec-lead">「身につけている」から、取り出すより速い。<br/>手元のワンタップでブザーON、安心がすぐそばに。</p>
         <ul>
@@ -197,26 +232,27 @@
           </a>
         </div>
       </div>
-      <div class="fade-up"><img src="assets/watch.png" alt="Apple Watch での操作イメージ" /></div>
+      <div class="device float-y reveal" data-delay="120"><img src="assets/watch.png" alt="Apple Watch での操作イメージ" /></div>
     </div>
   </section>
 
+  <!-- ===== How to ===== -->
   <section id="howto">
     <div class="container">
-      <h2 class="sec-title">使い方（30秒）</h2>
-      <p class="sec-lead">難しい設定は不要。ダウンロード後、次の3ステップで準備完了。</p>
+      <h2 class="sec-title reveal">使い方（30秒）</h2>
+      <p class="sec-lead reveal" data-delay="80">難しい設定は不要。ダウンロード後、次の3ステップで準備完了。</p>
       <div class="steps">
-        <div class="step fade-up">
+        <div class="step reveal" data-delay="0">
           <div class="num">01</div>
           <h4>アプリを開く</h4>
           <p>ホーム画面またはApple Watchから起動。最初の説明に沿って許可を設定します。</p>
         </div>
-        <div class="step fade-up">
+        <div class="step reveal" data-delay="120">
           <div class="num">02</div>
           <h4>ブザーを試す</h4>
           <p>3種類から好みの音を選択。音量や止め方を事前に確認しておくと安心です。</p>
         </div>
-        <div class="step fade-up">
+        <div class="step reveal" data-delay="240">
           <div class="num">03</div>
           <h4>位置情報共有を確認</h4>
           <p>地図で現在地の住所が表示されるか確認。共有ボタンから家族へテスト送信しましょう。</p>
@@ -225,37 +261,39 @@
     </div>
   </section>
 
+  <!-- ===== CTA Band ===== -->
   <section>
     <div class="container">
-      <div class="cta-band fade-up">
+      <div class="cta-band reveal" data-delay="0">
         <div>
           <div class="badge">まずは無料で体験（価格はApp Storeの表示をご確認ください）</div>
           <h3 style="margin:8px 0 0">今日から “安心を持ち歩く”。</h3>
         </div>
-        <a class="app-badge" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" data-cta="cta-band">
+        <a class="app-badge pulse" href="https://apps.apple.com/jp/app/%E5%BE%A1%E5%AE%88%E3%82%8A%E3%83%96%E3%82%B6%E3%83%BC/id6443486111" target="_blank" rel="noopener" data-cta="cta-band">
           <img src="assets/appstore-ja.png" alt="App Storeからダウンロード" />
         </a>
       </div>
     </div>
   </section>
 
+  <!-- ===== FAQ ===== -->
   <section id="faq">
     <div class="container">
-      <h2 class="sec-title">よくある質問</h2>
+      <h2 class="sec-title reveal">よくある質問</h2>
       <div class="faq">
-        <details>
+        <details class="reveal" data-delay="0">
           <summary>通報（110番）はアプリから直接できますか？</summary>
           <div style="margin-top:8px">通話アプリを開いて発信する形になります。緊急時は安全を最優先に、周囲の大人・警備や近隣施設への連絡も併用してください。</div>
         </details>
-        <details>
+        <details class="reveal" data-delay="80">
           <summary>位置情報は誰にでも共有されますか？</summary>
           <div style="margin-top:8px">共有ボタンを押したときに<strong>あなたが選んだ相手</strong>にのみ送信されます。自動的に公開されることはありません。</div>
         </details>
-        <details>
+        <details class="reveal" data-delay="160">
           <summary>音が出せない状況でも使えますか？</summary>
           <div style="margin-top:8px">はい。ブザーが使えない場面では、画面全体で助けを求める<strong>SOS表示</strong>をご利用ください。</div>
         </details>
-        <details>
+        <details class="reveal" data-delay="240">
           <summary>料金はいくらですか？</summary>
           <div style="margin-top:8px">最新の価格・機能はApp Storeのアプリページをご確認ください。</div>
         </details>
@@ -274,6 +312,7 @@
     </div>
   </footer>
 
+  <!-- Sticky CTA（下部固定。3秒後に表示） -->
   <div class="sticky-cta" id="stickyCta" hidden>
     <div class="inner">
       <img src="assets/omamori-icon.png" alt="御守りアイコン" />
@@ -283,6 +322,7 @@
     </div>
   </div>
 
+  <!-- JSON-LD（検索向け構造化データ） -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -297,19 +337,41 @@
   </script>
 
   <script>
+    // 年号
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    const io = new IntersectionObserver(es=>es.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('inview'); io.unobserve(e.target); }
-    }),{threshold: .15});
-    document.querySelectorAll('.fade-up').forEach(n=>io.observe(n));
+    // Parallax for hero background + hide-on-scroll header
+    const heroBg = document.getElementById('heroBg');
+    let lastY = window.scrollY;
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY;
+      // パララックス（軽量）
+      const t = Math.min(40, y * 0.12); // 最大40px
+      heroBg.style.transform = `translateY(${t}px) scale(1.06)`;
+      lastY = y;
+    }, {passive:true});
 
-    setTimeout(()=>document.getElementById('stickyCta').hidden=false, 3000);
+    // Scroll reveal with stagger via data-delay
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const d = +e.target.dataset.delay || 0;
+          setTimeout(()=>e.target.classList.add('inview'), d);
+          io.unobserve(e.target);
+        }
+      })
+    },{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
+
+    // Sticky CTA（3秒後 or 60% スクロールで表示）
+    const sticky = document.getElementById('stickyCta');
+    setTimeout(()=>sticky.hidden=false, 3000);
     window.addEventListener('scroll',()=>{
       const s = window.scrollY, h = document.body.scrollHeight - innerHeight;
-      if(h>0 && s/h>0.6) document.getElementById('stickyCta').hidden=false;
-    });
+      if(h>0 && s/h>0.6) sticky.hidden=false;
+    },{passive:true});
 
+    // 計測イベントの素振り（GTM差し替え用）
     function track(name, data){
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({event:name, ...data});
