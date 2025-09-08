@@ -156,6 +156,17 @@
 
   gtag('config', 'G-QPDLFB3QM6');
 </script>
+<script>
+  // CTAクリックをGA4に送信（data-cta 属性を利用）
+  document.querySelectorAll('[data-cta]').forEach(el => {
+    el.addEventListener('click', () => {
+      gtag('event', 'cta_click', {
+        event_category: 'engagement',
+        event_label: el.dataset.cta
+      });
+    });
+  });
+</script>
 </head>
 <body>
   <header id="top">
